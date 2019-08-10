@@ -6,7 +6,8 @@ module.exports = {
   devtool: "source-map",
   resolve: {
     // Add '.ts' and '.tsx' as resolvable extensions.
-    extensions: [".ts", ".tsx"]
+    extensions: [".ts", ".tsx"],
+    modules: ["node_modules", "./src"]
   },
   output: {
     path: path.resolve(__dirname, "dist"),
