@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack",
     "lint": "tslint 'src/**/*.{ts,tsx}'",
-    "test": "jest"
+    "test": "jest",
+    "watch": "reflex --start-service -r '^src\\/.*\\.tsx?$' -R '^node_modules/' -- npm run build"
   },
   "author": "",
   "license": "ISC",
@@ -33,6 +34,7 @@
     "webpack-cli": "^3.3.6"
   },
   "dependencies": {
+    "@material-ui/core": "^4.3.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   }
