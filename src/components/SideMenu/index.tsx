@@ -1,4 +1,4 @@
-import Paper from '@material-ui/core/Paper'
+import SearchActions from 'containers/SideMenu/SearchActions'
 import * as React from 'react'
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 const SideMenu = (props: Props) => {
   return (
     <div style={{ width: 300, borderRight: `1px solid black`, ...props.style }}>
-      <Paper>Find here</Paper>
+      <SearchActions />
     </div>
   )
 }

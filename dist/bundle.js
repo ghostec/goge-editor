@@ -17003,7 +17003,7 @@ module.exports = function(originalModule) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const SideMenu_1 = __webpack_require__(/*! components/SideMenu */ "./src/components/SideMenu.tsx");
+const SideMenu_1 = __webpack_require__(/*! components/SideMenu */ "./src/components/SideMenu/index.tsx");
 const Editor_1 = __webpack_require__(/*! containers/Editor */ "./src/containers/Editor.tsx");
 const React = __webpack_require__(/*! react */ "react");
 const App = () => {
@@ -17016,10 +17016,10 @@ exports.default = App;
 
 /***/ }),
 
-/***/ "./src/components/SideMenu.tsx":
-/*!*************************************!*\
-  !*** ./src/components/SideMenu.tsx ***!
-  \*************************************/
+/***/ "./src/components/SideMenu/index.tsx":
+/*!*******************************************!*\
+  !*** ./src/components/SideMenu/index.tsx ***!
+  \*******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
