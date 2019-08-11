@@ -9,6 +9,8 @@ import useAutocomplete, { Suggestion } from 'hooks/useAutocomplete'
 import useClickOutside from 'hooks/useClickOutside'
 import * as React from 'react'
 
+declare var goge: any
+
 const SearchActions = ({ style }: { style?: any }) => {
   const [focused, setFocused] = React.useState<boolean>(false)
   const toggleFocused = React.useCallback(() => setFocused(!focused), [
@@ -20,7 +22,7 @@ const SearchActions = ({ style }: { style?: any }) => {
     fetchSuggestions: React.useCallback(text => {
       return new Promise<Suggestion[]>(resolve => {
         setTimeout(
-          () => resolve([{ value: 'something', text, label: text }]),
+          () => resolve([{ value: goge.AddBoxEvent, text, label: text }]),
           2000
         )
       })
@@ -99,6 +101,7 @@ const Results = ({
               width: '100%',
               justifyContent: 'flex-start',
             }}
+            onClick={() => goge.Dispatch(sugg.value)}
           >
             {sugg.label}
           </Button>

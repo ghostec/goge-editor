@@ -7,14 +7,13 @@ interface Props {
 const Editor = (props: Props) => {
   return (
     <div
+      id="screen"
       style={{
         display: 'flex',
         flex: '1 1 auto',
         ...props.style,
       }}
-    >
-      <h1>Editor</h1>
-    </div>
+    />
   )
 }
 

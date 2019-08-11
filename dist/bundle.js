@@ -17049,8 +17049,7 @@ exports.default = SideMenu;
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(/*! react */ "react");
 const Editor = (props) => {
-    return (React.createElement("div", { style: Object.assign({ display: 'flex', flex: '1 1 auto' }, props.style) },
-        React.createElement("h1", null, "Editor")));
+    return (React.createElement("div", { id: "screen", style: Object.assign({ display: 'flex', flex: '1 1 auto' }, props.style) }));
 };
 exports.default = Editor;
 
@@ -17087,7 +17086,7 @@ const SearchActions = ({ style }) => {
         text: 'Add Box: Mesh',
         fetchSuggestions: React.useCallback(text => {
             return new Promise(resolve => {
-                setTimeout(() => resolve([{ value: 'something', text, label: text }]), 2000);
+                setTimeout(() => resolve([{ value: goge.AddBoxEvent, text, label: text }]), 2000);
             });
         }, []),
     });
@@ -17119,7 +17118,7 @@ const Results = ({ fetching, suggestions, style, }) => {
         React.createElement(Button_1.default, { color: "primary", style: {
                 width: '100%',
                 justifyContent: 'flex-start',
-            } }, sugg.label))))));
+            }, onClick: () => goge.Dispatch(sugg.value) }, sugg.label))))));
 };
 exports.default = SearchActions;
 
