@@ -4,6 +4,8 @@ import * as React from 'react'
 interface UseAutocompleteArgs {
   text: string
   fetchSuggestions(text: string): Promise<Suggestion[]>
+  // custom function to filter suggestions based on `text`.
+  // Default: IFilterSuggestions
   filterSuggestions?(text: string, suggs: Suggestion[]): Suggestion[]
 }
 

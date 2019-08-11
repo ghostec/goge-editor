@@ -11,6 +11,8 @@ const Transition = ({
   mounted: boolean;
   style?: any;
 }) => {
+  // TODO: don't unmount right away! need to keep it mounted for as long as
+  // transition takes
   const previousMounted = usePrevious(mounted)
   const classes = useStyles()
   const [classToUse, setClassToUse] = React.useState(
