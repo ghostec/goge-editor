@@ -18,11 +18,14 @@ const SearchActions = ({ style }: { style?: any }) => {
     focused,
   ])
   const [suggestions, fetching] = useAutocomplete({
-    text: 'Add Box: Mesh',
+    text: '',
     fetchSuggestions: React.useCallback(text => {
       return new Promise<Suggestion[]>(resolve => {
         setTimeout(
-          () => resolve([{ value: goge.AddBoxEvent, text, label: text }]),
+          () =>
+            resolve([
+              { value: goge.AddBoxEvent, text: 'Add Box', label: 'Add Box' },
+            ]),
           2000
         )
       })

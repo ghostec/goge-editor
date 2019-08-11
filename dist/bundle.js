@@ -17048,8 +17048,17 @@ exports.default = SideMenu;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(/*! react */ "react");
+// react events onMouseEnter onMouseLeave => activate/deac listeners
+// listen for middle mouse move
 const Editor = (props) => {
-    return (React.createElement("div", { id: "screen", style: Object.assign({ display: 'flex', flex: '1 1 auto' }, props.style) }));
+    return (React.createElement("div", { id: "screen", style: Object.assign({ display: 'flex', flex: '1 1 auto' }, props.style), onWheel: (e) => {
+            if (e.deltaY > 0) {
+                goge.Dispatch(goge.ZoomInEvent);
+            }
+            if (e.deltaY < 0) {
+                goge.Dispatch(goge.ZoomOutEvent);
+            }
+        } }));
 };
 exports.default = Editor;
 
@@ -17083,10 +17092,12 @@ const SearchActions = ({ style }) => {
         focused,
     ]);
     const [suggestions, fetching] = useAutocomplete_1.default({
-        text: 'Add Box: Mesh',
+        text: '',
         fetchSuggestions: React.useCallback(text => {
             return new Promise(resolve => {
-                setTimeout(() => resolve([{ value: goge.AddBoxEvent, text, label: text }]), 2000);
+                setTimeout(() => resolve([
+                    { value: goge.AddBoxEvent, text: 'Add Box', label: 'Add Box' },
+                ]), 2000);
             });
         }, []),
     });
