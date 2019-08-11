@@ -5,30 +5,52 @@ import { createUseStyles } from 'react-jss'
 const Transition = ({
   children,
   mounted,
+  unmountDelayMsecs,
   style,
 }: {
   children: React.ReactNode;
   mounted: boolean;
+  unmountDelayMsecs?: number;
   style?: any;
 }) => {
-  // TODO: don't unmount right away! need to keep it mounted for as long as
-  // transition takes
   const previousMounted = usePrevious(mounted)
   const classes = useStyles()
   const [classToUse, setClassToUse] = React.useState(
     mounted ? classes.unmounted : classes.mounted
   )
+  const [delayedMounted, setDelayedMounted] = React.useState<boolean>(mounted)
+  const timeoutRef = React.useRef(null)
 
   React.useEffect(() => {
     if (mounted === previousMounted) {
       return
     }
     setClassToUse(mounted ? classes.mounted : classes.unmounted)
-  }, [mounted, previousMounted, classes, setClassToUse])
+    if (!mounted) {
+      timeoutRef.current = setTimeout(
+        () => setDelayedMounted(false),
+        unmountDelayMsecs || 30
+      )
+    } else {
+      setDelayedMounted(true)
+      clearTimeout(timeoutRef.current)
+    }
+  }, [
+    mounted,
+    previousMounted,
+    delayedMounted,
+    classes,
+    setClassToUse,
+    setDelayedMounted,
+  ])
+
+  React.useEffect(() => {
+    return () => clearTimeout(timeoutRef.current)
+  }, [])
 
   return (
     <div className={classToUse} style={style}>
-      {children}
+      {delayedMounted && children}
     </div>
   )
 }

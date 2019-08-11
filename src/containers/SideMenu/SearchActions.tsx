@@ -1,3 +1,4 @@
+import Button from '@material-ui/core/Button'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import IconButton from '@material-ui/core/IconButton'
 import InputBase from '@material-ui/core/InputBase'
@@ -5,6 +6,7 @@ import Paper from '@material-ui/core/Paper'
 import SearchIcon from '@material-ui/icons/Search'
 import Transition from 'containers/Transition'
 import useAutocomplete, { Suggestion } from 'hooks/useAutocomplete'
+import useClickOutside from 'hooks/useClickOutside'
 import * as React from 'react'
 
 const SearchActions = ({ style }: { style?: any }) => {
@@ -24,29 +26,47 @@ const SearchActions = ({ style }: { style?: any }) => {
       })
     }, []),
   })
+  const ref = useClickOutside(
+    React.useCallback(() => {
+      if (!focused) {
+        return
+      }
+      toggleFocused()
+    }, [toggleFocused, focused])
+  )
   return (
-    <div style={{ padding: 16, ...style }}>
-      <Paper elevation={focused ? 0 : 1} style={{ display: 'flex' }}>
-        <IconButton
-          aria-label="search for actions"
-          style={{ padding: 6, margin: 6 }}
+    <div style={style} ref={ref}>
+      <div
+        style={{
+          padding: 16,
+          paddingBottom: 0,
+          ...(focused ? { borderBottom: '1px solid black' } : {}),
+        }}
+      >
+        <Paper
+          elevation={focused ? 0 : 1}
+          style={{
+            display: 'flex',
+          }}
         >
-          <SearchIcon />
-        </IconButton>
-        <InputBase
-          placeholder="Search for actions"
-          inputProps={{ 'aria-label': 'search for actions' }}
-          onFocus={toggleFocused}
-          onBlur={toggleFocused}
-          style={{ width: '100%' }}
-        />
-      </Paper>
-      <Transition mounted={focused}>
-        <Results
-          fetching={fetching}
-          suggestions={suggestions}
-          style={{ marginTop: 16 }}
-        />
+          <IconButton
+            aria-label="search for actions"
+            style={{ padding: 6, margin: 6 }}
+          >
+            <SearchIcon />
+          </IconButton>
+          <InputBase
+            placeholder="Search for actions"
+            inputProps={{ 'aria-label': 'search for actions' }}
+            onFocus={toggleFocused}
+            style={{
+              width: '100%',
+            }}
+          />
+        </Paper>
+      </div>
+      <Transition mounted={focused} style={{ padding: 16 }}>
+        <Results fetching={fetching} suggestions={suggestions} />
       </Transition>
     </div>
   )
@@ -59,7 +79,7 @@ const Results = ({
 }: {
   fetching: boolean;
   suggestions: Suggestion[];
-  style: any;
+  style?: any;
 }) => {
   if (fetching) {
     return (
@@ -72,8 +92,16 @@ const Results = ({
   return (
     <ul style={{ listStyleType: 'none', ...style }}>
       {suggestions.map(sugg => (
-        <li key={sugg.text} style={{ marginLeft: 16 }}>
-          {sugg.label}
+        <li key={sugg.text}>
+          <Button
+            color="primary"
+            style={{
+              width: '100%',
+              justifyContent: 'flex-start',
+            }}
+          >
+            {sugg.label}
+          </Button>
         </li>
       ))}
     </ul>
