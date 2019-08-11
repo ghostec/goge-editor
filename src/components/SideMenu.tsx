@@ -1,4 +1,4 @@
-import Actions from 'containers/SideMenu/Actions'
+import SearchActions from 'containers/SideMenu/SearchActions'
 import * as React from 'react'
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 const SideMenu = (props: Props) => {
   return (
     <div style={{ width: 300, borderRight: `1px solid black`, ...props.style }}>
-      <Actions style={{ margin: 16 }} />
+      <SearchActions />
     </div>
   )
 }
