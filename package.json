@@ -33,7 +33,7 @@
     "tslint-react-hooks": "^2.2.1",
     "typescript": "^3.5.3",
     "webpack": "^4.39.1",
-    "webpack-cli": "^3.3.6"
+    "webpack-cli": "^3.3.12"
   },
   "dependencies": {
     "@material-ui/core": "^4.3.1",
